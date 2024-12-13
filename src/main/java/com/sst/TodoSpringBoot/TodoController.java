@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api/v1/todos")
 public class TodoController {
 
     private static List<Todo> todos;
@@ -21,19 +22,19 @@ public class TodoController {
         todos.add(new Todo(2,"Wash",2,true));
     }
 
-    @GetMapping("/todos")
+    @GetMapping
     public ResponseEntity<List<Todo>>  getTodos(){
         return ResponseEntity.ok(todos);
     }
 
-    @PostMapping("/todos")
+    @PostMapping
 //    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Todo> createTodo(@RequestBody Todo newTodo){
         todos.add(newTodo);
         return  ResponseEntity.status(HttpStatus.CREATED).body(newTodo) ;
     }
 
-    @GetMapping("/todos/{todoId}")
+    @GetMapping("/{todoId}")
     public ResponseEntity<?> getTodoById(@PathVariable Long todoId ){
         for(Todo todo:todos){
             if(todo.getId()==todoId){
