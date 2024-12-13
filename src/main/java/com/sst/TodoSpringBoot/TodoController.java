@@ -1,6 +1,7 @@
 package com.sst.TodoSpringBoot;
 
 
+import jakarta.websocket.server.PathParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,14 @@ public class TodoController {
         todos.add(new Todo(2,"Wash",2,true));
     }
 
+//    @GetMapping
+//    public ResponseEntity<List<Todo>>  getTodos(){
+//        return ResponseEntity.ok(todos);
+//    }
+
     @GetMapping
-    public ResponseEntity<List<Todo>>  getTodos(){
+    public ResponseEntity<List<Todo>>  getTodosParams(@RequestParam(required = false,defaultValue = "true") boolean isCompleted){
+        System.out.println("isCompleted: "+isCompleted);
         return ResponseEntity.ok(todos);
     }
 
